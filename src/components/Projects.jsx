@@ -8,7 +8,7 @@ const Projects = () => {
             title: "Portfolio Terminal",
             desc: "A terminal-style portfolio website with typing animation, showcasing personal information and social links in a minimalist design.",
             img: "/project-1.png",
-            link: "https://your-link.com",
+            link: "https://github.com/qvu04/portfolio",
             tags: [
                 { name: "React", color: "bg-blue-500/10 text-blue-600" },
                 { name: "Framer Motion", color: "bg-pink-500/10 text-pink-600" },
@@ -61,7 +61,7 @@ const Projects = () => {
             title: "ToDo App",
             desc: "A simple and efficient ToDo application built with React and LocalStorage for managing daily tasks offline.",
             img: "/project-5.png",
-            link: "https://your-link.com",
+            link: "https://github.com/qvu04/ToDo-App",
             tags: [
                 { name: "React", color: "bg-blue-500/10 text-blue-600" },
                 { name: "LocalStorage", color: "bg-slate-500/10 text-slate-700" },
