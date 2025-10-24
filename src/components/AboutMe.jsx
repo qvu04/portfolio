@@ -72,7 +72,7 @@ const AboutMe = () => {
                     </p>
 
                     {/* Personal Info */}
-                    <div className="grid grid-cols-2 gap-y-3 text-sm">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 text-sm">
                         <p>
                             <span className="font-semibold">Year of birth:</span>{" "}
                             <span className="text-pink-500">2004</span>
@@ -119,7 +119,7 @@ const AboutMe = () => {
             </div>
             <div
                 onClick={() => scrollTo("projects")}
-                className="absolute bottom-1 sm:bottom-6 left-1/2 transform -translate-x-1/2 cursor-pointer text-pink-500 hover:text-pink-400 animate-bounce"
+                className="absolute bottom-0 sm:bottom-4 left-1/2 transform -translate-x-1/2 cursor-pointer text-pink-500 hover:text-pink-400 animate-bounce"
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
