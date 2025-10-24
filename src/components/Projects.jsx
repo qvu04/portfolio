@@ -180,7 +180,7 @@ const Projects = () => {
 
             <div
                 onClick={() => scrollTo("contact")}
-                className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer text-pink-500 hover:text-pink-400 animate-bounce"
+                className="absolute bottom-1 md:bottom-6 left-1/2 transform -translate-x-1/2 cursor-pointer text-pink-500 hover:text-pink-400 animate-bounce"
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
