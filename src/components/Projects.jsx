@@ -1,20 +1,10 @@
-import { useState } from "react";
+"use client";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ProjectCard from "./ProjectCard";
 
 const Projects = () => {
     const projects = [
-        {
-            title: "Portfolio Terminal",
-            desc: "A terminal-style portfolio website with typing animation, showcasing personal information and social links in a minimalist design.",
-            img: "/project-1.png",
-            link: "https://github.com/qvu04/portfolio",
-            tags: [
-                { name: "React", color: "bg-blue-500/10 text-blue-600" },
-                { name: "Framer Motion", color: "bg-pink-500/10 text-pink-600" },
-                { name: "Tailwind CSS", color: "bg-cyan-500/10 text-cyan-600" },
-            ],
-        },
         {
             title: "Hotel Booking App",
             desc: "A hotel booking platform built with Next.js, featuring room search, booking management, and admin dashboard integration.",
@@ -58,6 +48,17 @@ const Projects = () => {
             ],
         },
         {
+            title: "Portfolio Terminal",
+            desc: "A terminal-style portfolio website with typing animation, showcasing personal information and social links in a minimalist design.",
+            img: "/project-1.png",
+            link: "https://github.com/qvu04/portfolio",
+            tags: [
+                { name: "React", color: "bg-blue-500/10 text-blue-600" },
+                { name: "Framer Motion", color: "bg-pink-500/10 text-pink-600" },
+                { name: "Tailwind CSS", color: "bg-cyan-500/10 text-cyan-600" },
+            ],
+        },
+        {
             title: "ToDo App",
             desc: "A simple and efficient ToDo application built with React and LocalStorage for managing daily tasks offline.",
             img: "/project-5.png",
@@ -69,10 +70,26 @@ const Projects = () => {
         },
     ];
 
-
     const [startIndex, setStartIndex] = useState(0);
     const [direction, setDirection] = useState(0);
-    const itemsPerPage = 4;
+    const [itemsPerPage, setItemsPerPage] = useState(4);
+
+    // Thay đổi itemsPerPage theo responsive
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 1024) {
+                setItemsPerPage(3); // desktop
+            } else if (window.innerWidth >= 768) {
+                setItemsPerPage(2); // tablet
+            } else {
+                setItemsPerPage(1); // mobile
+            }
+        };
+
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     const visibleProjects = projects.slice(startIndex, startIndex + itemsPerPage);
 
@@ -90,7 +107,6 @@ const Projects = () => {
         }
     };
 
-    // Animation variants cho container
     const variants = {
         enter: (direction) => ({
             x: direction > 0 ? 150 : -150,
@@ -107,38 +123,38 @@ const Projects = () => {
             transition: { duration: 0.4, ease: "easeIn" },
         }),
     };
+
     const scrollTo = (id) => {
         document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     };
+
     return (
         <section
-            className=" relative min-h-screen flex flex-col justify-center items-center py-16 bg-[#d4d8f0]"
+            className="relative min-h-screen flex flex-col justify-center items-center py-16 bg-[#d4d8f0]"
             id="projects"
         >
-            <h2 className="text-4xl font-bold mb-10 text-gray-900">
-                My Projects
-            </h2>
+            <h2 className="text-4xl font-bold mb-10 text-gray-900">My Projects</h2>
 
-            {/* Container có hiệu ứng */}
-            <div className="relative w-full max-w-10xl overflow-hidden px-20">
+            <div className="relative w-full max-w-10xl overflow-hidden px-6 md:px-10">
                 <AnimatePresence mode="wait" custom={direction}>
                     <motion.div
-                        key={startIndex} // Để AnimatePresence nhận biết state thay đổi
+                        key={startIndex}
                         custom={direction}
                         variants={variants}
                         initial="enter"
                         animate="center"
                         exit="exit"
-                        className="flex gap-20"
+                        className={`flex gap-8 md:gap-10 flex-wrap justify-center md:flex-wrap lg:flex-nowrap`}
                     >
                         {visibleProjects.map((project, index) => (
-                            <ProjectCard key={index} project={project} />
+                            <div key={index} className="w-full sm:w-[48%] lg:w-[23%]">
+                                <ProjectCard project={project} />
+                            </div>
                         ))}
                     </motion.div>
                 </AnimatePresence>
             </div>
 
-            {/* Nút điều hướng */}
             <div className="flex gap-6 mt-10">
                 <button
                     onClick={handlePrev}
@@ -161,6 +177,7 @@ const Projects = () => {
                     Next
                 </button>
             </div>
+
             <div
                 onClick={() => scrollTo("contact")}
                 className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer text-pink-500 hover:text-pink-400 animate-bounce"
